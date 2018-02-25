@@ -1,6 +1,8 @@
 # WordPress via Docker
 This repository provides a ready-to-use WordPress setup on Docker, perfect for theme/plugin development.
 
+![](https://i2.wp.com/www.davideguida.com/wp-content/uploads/2017/06/dockerPress.png?resize=788%2C227&ssl=1)
+
 ## Theme deployment
 It includes 2 starter themes : 
 - one from [underscores.me](http://underscores.me/)
