@@ -25,7 +25,6 @@ services:
   myadmin:
     env_file: docker.env
     image: phpmyadmin/phpmyadmin:4.8.1
-    container_name: wp-phpmyadmin
     ports:
       - "8080:80"
     restart: always
