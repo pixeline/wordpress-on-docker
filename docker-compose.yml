@@ -2,16 +2,14 @@ version: '3'
 services:
   db:
     image: mysql:5.7
+    env_file: docker.env
     volumes:
     # Here we’re telling the db container to look in that data folder for a .sql export 
     # and to use it to populate our database.
       - ./data:/docker-entrypoint-initdb.d
     restart: always # always restart the container after reboot
-    environment: # environment variables -- mysql options in this case
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+    ports:
+      - "3306:3306"
 
   wordpress: # name of our wordpress container
     depends_on: # container dependencies that need to be running first
@@ -20,10 +18,18 @@ services:
     ports:
       - "1973:80" # setting our ports for networking
     restart: always
-    environment:
-      WORDPRESS_DB_HOST: db:3306 # default mysql port
-      WORDPRESS_DB_PASSWORD: wordpress # matches the password set in the db container
+    env_file: docker.env
     volumes: # this is where we tell Docker what to pay attention to
-      - ./wp-content/themes/my-theme:/var/www/html/wp-content/themes/my-theme # mapping our custom theme to the container
-      - ./wp-content/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
-      - ./wp-content/uploads:/var/www/html/wp-content/uploads # map our uploads to the container
+      - ./wp-content:/var/www/html/wp-content # mapping our custom theme to the container
+
+  myadmin:
+    env_file: docker.env
+    image: phpmyadmin/phpmyadmin:4.8.1
+    container_name: wp-phpmyadmin
+    ports:
+      - "8080:80"
+    restart: always
+    links:
+      - db
+    depends_on:
+      - db
