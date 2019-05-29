@@ -24,3 +24,7 @@ You could also [generate one here](https://wppb.me/).
 - Visit http://localhost:1973/ to see the live local site.
 - Visit http://localhost:8080/ to use PhpMyAdmin and perform database dumps (obligatory in between docker reloads, otherwise you will lose any change in the database).
 - To stop the machine: `docker-compose down`
+
+## Populate the database
+If you put a .sql file in the /data folder, it will autopopulate the `wordpress`database when you fire up docker-compose.
+So a good idea is to backup your wordpress database as an SQL file into the `/data`folder before shutting down docker. You can use phpmyadmin (on localhost:8080) to export the database.
