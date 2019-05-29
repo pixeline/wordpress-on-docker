@@ -4,7 +4,7 @@ services:
     image: mysql:5.7
     env_file: docker.env
     volumes:
-    # Here we’re telling the db container to look in that data folder for a .sql export 
+    # Here we’re telling the db container to look in that data folder for a .sql export
     # and to use it to populate our database.
       - ./data:/docker-entrypoint-initdb.d
     restart: always # always restart the container after reboot
